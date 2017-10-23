@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
+  TabNavigator,
   StackNavigator,
-} from 'react-navigation'
+} from 'react-navigation';
+import Icon from "react-native-vector-icons/Entypo";
 
 // Sample
 const sampleList = [
@@ -62,17 +64,62 @@ class DetailComponent extends Component {
   }
 }
 
-export const SimpleApp = StackNavigator({
+const Stack = StackNavigator({
   Detail: {screen: DetailComponent, navigationOptions: {title: 'Detail'}},
   List: {screen: ListComponent, navigationOptions: {title: 'Home'}}
 }, {
   initialRouteName: 'List'
 });
 
+const MemoList = ({screenProps}) => (
+  <Stack screenProps={screenProps}/>
+);
+
+const AddMemoItemScreen = () => (
+  <View style={styles.container}>
+    <Text style={styles.paragraph}>This is AddMemoItemScreen</Text>
+  </View>
+);
+
+const Tab = TabNavigator({
+  List: {
+    screen: MemoList,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Icon name="list" size={24} color={tintColor}/>
+    }
+  },
+  AddItem: {
+    screen: AddMemoItemScreen,
+    navigationOptions: {
+      tabBarIcon: ({tintColor}) => <Icon name="add-to-list" size={24} color={tintColor}/>
+    }
+  },
+}, {
+  tabBarOptions: {
+    style: {
+      backgroundColor: '#ffffff'
+    },
+    indicatorStyle: {
+      backgroundColor: '#f73546'
+    },
+    activeTintColor: '#037aff',
+    inactiveTintColor: '#737373',
+    showLabel: false,
+    showIcon: true,
+  },
+});
+
 export default class App extends Component<{}> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sampleList,
+    };
+  }
+
   render() {
     return (
-      <SimpleApp/>
+      <Tab screenProps={{sampleList: this.state.sampleList}}/>
     );
   }
 }
