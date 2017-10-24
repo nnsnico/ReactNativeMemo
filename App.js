@@ -68,7 +68,8 @@ const Stack = StackNavigator({
   Detail: {screen: DetailComponent, navigationOptions: {title: 'Detail'}},
   List: {screen: ListComponent, navigationOptions: {title: 'Home'}}
 }, {
-  initialRouteName: 'List'
+  initialRouteName: 'List',
+  headerMode: 'none'
 });
 
 class MemoListComponent extends Component {
