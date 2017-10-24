@@ -71,25 +71,33 @@ const Stack = StackNavigator({
   initialRouteName: 'List'
 });
 
-const MemoList = ({screenProps}) => (
-  <Stack screenProps={screenProps}/>
-);
+class MemoListComponent extends Component {
+  render() {
+    return (
+      <Stack screenProps={this.screenProps}/>
+    );
+  }
+}
 
-const AddMemoItemScreen = () => (
-  <View style={styles.container}>
-    <Text style={styles.paragraph}>This is AddMemoItemScreen</Text>
-  </View>
-);
+class AddMemoItemComponent extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.paragraph}>This is AddMemoItemScreen</Text>
+      </View>
+    );
+  }
+}
 
 const Tab = TabNavigator({
   List: {
-    screen: MemoList,
+    screen: MemoListComponent,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => <Icon name="list" size={24} color={tintColor}/>
     }
   },
   AddItem: {
-    screen: AddMemoItemScreen,
+    screen: AddMemoItemComponent,
     navigationOptions: {
       tabBarIcon: ({tintColor}) => <Icon name="add-to-list" size={24} color={tintColor}/>
     }
@@ -100,7 +108,7 @@ const Tab = TabNavigator({
       backgroundColor: '#ffffff'
     },
     indicatorStyle: {
-      backgroundColor: '#f73546'
+      backgroundColor: '#1fff1f'
     },
     activeTintColor: '#037aff',
     inactiveTintColor: '#737373',

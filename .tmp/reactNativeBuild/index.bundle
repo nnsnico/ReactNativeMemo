@@ -58018,7 +58018,7 @@ var _reactNative = require(12            ); // 12 = react-native
 
 var _reactNavigation = require(489               ); // 489 = react-navigation
 
-var _Entypo = require(619                               ); // 619 = react-native-vector-icons/Entypo
+var _Entypo = require(550                               ); // 550 = react-native-vector-icons/Entypo
 
 var _Entypo2 = _interopRequireDefault(_Entypo);
 
@@ -58036,6 +58036,12 @@ var _components = {
   },
   DetailComponent: {
     displayName: 'DetailComponent'
+  },
+  MemoListComponent: {
+    displayName: 'MemoListComponent'
+  },
+  AddMemoItemComponent: {
+    displayName: 'AddMemoItemComponent'
   },
   App: {
     displayName: 'App'
@@ -58176,57 +58182,86 @@ var Stack = (0, _reactNavigation.StackNavigator)({
   initialRouteName: 'List'
 });
 
-var MemoList = function MemoList(_ref2) {
-  var screenProps = _ref2.screenProps;
-  return _react3.default.createElement(Stack, { screenProps: screenProps, __source: {
-      fileName: _jsxFileName,
-      lineNumber: 75
-    }
-  });
-};
+var MemoListComponent = _wrapComponent('MemoListComponent')(function (_Component3) {
+  _inherits(MemoListComponent, _Component3);
 
-var AddMemoItemScreen = function AddMemoItemScreen() {
-  return _react3.default.createElement(
-    _reactNative.View,
-    { style: styles.container, __source: {
-        fileName: _jsxFileName,
-        lineNumber: 79
-      }
-    },
-    _react3.default.createElement(
-      _reactNative.Text,
-      { style: styles.paragraph, __source: {
+  function MemoListComponent() {
+    _classCallCheck(this, MemoListComponent);
+
+    return _possibleConstructorReturn(this, (MemoListComponent.__proto__ || Object.getPrototypeOf(MemoListComponent)).apply(this, arguments));
+  }
+
+  _createClass(MemoListComponent, [{
+    key: 'render',
+    value: function render() {
+      return _react3.default.createElement(Stack, { screenProps: this.screenProps, __source: {
           fileName: _jsxFileName,
-          lineNumber: 80
+          lineNumber: 77
         }
-      },
-      'This is AddMemoItemScreen'
-    )
-  );
-};
+      });
+    }
+  }]);
+
+  return MemoListComponent;
+}(_react2.Component));
+
+var AddMemoItemComponent = _wrapComponent('AddMemoItemComponent')(function (_Component4) {
+  _inherits(AddMemoItemComponent, _Component4);
+
+  function AddMemoItemComponent() {
+    _classCallCheck(this, AddMemoItemComponent);
+
+    return _possibleConstructorReturn(this, (AddMemoItemComponent.__proto__ || Object.getPrototypeOf(AddMemoItemComponent)).apply(this, arguments));
+  }
+
+  _createClass(AddMemoItemComponent, [{
+    key: 'render',
+    value: function render() {
+      return _react3.default.createElement(
+        _reactNative.View,
+        { style: styles.container, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 85
+          }
+        },
+        _react3.default.createElement(
+          _reactNative.Text,
+          { style: styles.paragraph, __source: {
+              fileName: _jsxFileName,
+              lineNumber: 86
+            }
+          },
+          'This is AddMemoItemScreen'
+        )
+      );
+    }
+  }]);
+
+  return AddMemoItemComponent;
+}(_react2.Component));
 
 var Tab = (0, _reactNavigation.TabNavigator)({
   List: {
-    screen: MemoList,
+    screen: MemoListComponent,
     navigationOptions: {
-      tabBarIcon: function tabBarIcon(_ref3) {
-        var tintColor = _ref3.tintColor;
+      tabBarIcon: function tabBarIcon(_ref2) {
+        var tintColor = _ref2.tintColor;
         return _react3.default.createElement(_Entypo2.default, { name: 'list', size: 24, color: tintColor, __source: {
             fileName: _jsxFileName,
-            lineNumber: 88
+            lineNumber: 96
           }
         });
       }
     }
   },
   AddItem: {
-    screen: AddMemoItemScreen,
+    screen: AddMemoItemComponent,
     navigationOptions: {
-      tabBarIcon: function tabBarIcon(_ref4) {
-        var tintColor = _ref4.tintColor;
+      tabBarIcon: function tabBarIcon(_ref3) {
+        var tintColor = _ref3.tintColor;
         return _react3.default.createElement(_Entypo2.default, { name: 'add-to-list', size: 24, color: tintColor, __source: {
             fileName: _jsxFileName,
-            lineNumber: 94
+            lineNumber: 102
           }
         });
       }
@@ -58237,28 +58272,28 @@ var Tab = (0, _reactNavigation.TabNavigator)({
     style: {
       backgroundColor: '#ffffff'
     },
+    indicatorStyle: {
+      backgroundColor: '#1fff1f'
+    },
     activeTintColor: '#037aff',
     inactiveTintColor: '#737373',
-    indicatorStyle: {
-      backgroundColor: '#f73546'
-    },
     showLabel: false,
     showIcon: true
   }
 });
 
-var App = _wrapComponent('App')(function (_Component3) {
-  _inherits(App, _Component3);
+var App = _wrapComponent('App')(function (_Component5) {
+  _inherits(App, _Component5);
 
   function App(props) {
     _classCallCheck(this, App);
 
-    var _this3 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+    var _this5 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this3.state = {
+    _this5.state = {
       sampleList: sampleList
     };
-    return _this3;
+    return _this5;
   }
 
   _createClass(App, [{
@@ -58266,7 +58301,7 @@ var App = _wrapComponent('App')(function (_Component3) {
     value: function render() {
       return _react3.default.createElement(Tab, { screenProps: { sampleList: this.state.sampleList }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 122
+          lineNumber: 130
         }
       });
     }
@@ -66188,11 +66223,11 @@ __d(/* react-native-vector-icons/Entypo.js */function(global, require, module, e
 });
 exports.getImageSource = exports.ToolbarAndroid = exports.TabBarItemIOS = exports.TabBarItem = exports.Button = undefined;
 
-var _createIconSet = require(603                    ); // 603 = ./lib/create-icon-set
+var _createIconSet = require(551                    ); // 551 = ./lib/create-icon-set
 
 var _createIconSet2 = _interopRequireDefault(_createIconSet);
 
-var _Entypo = require(620                      ); // 620 = ./glyphmaps/Entypo.json
+var _Entypo = require(599                      ); // 599 = ./glyphmaps/Entypo.json
 
 var _Entypo2 = _interopRequireDefault(_Entypo);
 
@@ -66206,7 +66241,7 @@ var TabBarItem = exports.TabBarItem = iconSet.TabBarItem;
 var TabBarItemIOS = exports.TabBarItemIOS = iconSet.TabBarItemIOS;
 var ToolbarAndroid = exports.ToolbarAndroid = iconSet.ToolbarAndroid;
 var getImageSource = exports.getImageSource = iconSet.getImageSource;
-}, 619, null, "react-native-vector-icons/Entypo.js");
+}, 550, null, "react-native-vector-icons/Entypo.js");
 __d(/* react-native-vector-icons/lib/create-icon-set.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -66231,17 +66266,17 @@ var _propTypes = require(125         ); // 125 = prop-types
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactNative = require(604             ); // 604 = ./react-native
+var _reactNative = require(552             ); // 552 = ./react-native
 
-var _iconButton = require(605            ); // 605 = ./icon-button
+var _iconButton = require(553            ); // 553 = ./icon-button
 
 var _iconButton2 = _interopRequireDefault(_iconButton);
 
-var _tabBarItemIos = require(606                 ); // 606 = ./tab-bar-item-ios
+var _tabBarItemIos = require(596                 ); // 596 = ./tab-bar-item-ios
 
 var _tabBarItemIos2 = _interopRequireDefault(_tabBarItemIos);
 
-var _toolbarAndroid = require(607                ); // 607 = ./toolbar-android
+var _toolbarAndroid = require(598                ); // 598 = ./toolbar-android
 
 var _toolbarAndroid2 = _interopRequireDefault(_toolbarAndroid);
 
@@ -66447,7 +66482,7 @@ function createIconSet(glyphMap, fontFamily, fontFile) {
 
   return Icon;
 }
-}, 603, null, "react-native-vector-icons/lib/create-icon-set.js");
+}, 551, null, "react-native-vector-icons/lib/create-icon-set.js");
 __d(/* react-native-vector-icons/lib/react-native.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -66463,7 +66498,7 @@ Object.keys(_reactNative).forEach(function (key) {
     }
   });
 });
-}, 604, null, "react-native-vector-icons/lib/react-native.js");
+}, 552, null, "react-native-vector-icons/lib/react-native.js");
 __d(/* react-native-vector-icons/lib/icon-button.js */function(global, require, module, exports) {Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -66500,7 +66535,7 @@ var _propTypes = require(125         ); // 125 = prop-types
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactNative = require(604             ); // 604 = ./react-native
+var _reactNative = require(552             ); // 552 = ./react-native
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -66636,7 +66671,7 @@ function createIconButtonComponent(Icon) {
     size: 20
   }, _temp));
 }
-}, 605, null, "react-native-vector-icons/lib/icon-button.js");
+}, 553, null, "react-native-vector-icons/lib/icon-button.js");
 __d(/* lodash/isString.js */function(global, require, module, exports) {var baseGetTag = require(186            ), // 186 = ./_baseGetTag
     isArray = require(228        ), // 228 = ./isArray
     isObjectLike = require(237             ); // 237 = ./isObjectLike
@@ -67422,7 +67457,7 @@ var _propTypes = require(125         ); // 125 = prop-types
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactNative = require(604             ); // 604 = ./react-native
+var _reactNative = require(552             ); // 552 = ./react-native
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67518,7 +67553,7 @@ function createTabBarItemIOSComponent(IconNamePropType, getImageSource) {
     iconSize: 30
   }, _temp));
 }
-}, 606, null, "react-native-vector-icons/lib/tab-bar-item-ios.js");
+}, 596, null, "react-native-vector-icons/lib/tab-bar-item-ios.js");
 __d(/* lodash/isEqual.js */function(global, require, module, exports) {var baseIsEqual = require(212             ); // 212 = ./_baseIsEqual
 
 function isEqual(value, other) {
@@ -67559,7 +67594,7 @@ var _propTypes = require(125         ); // 125 = prop-types
 
 var _propTypes2 = _interopRequireDefault(_propTypes);
 
-var _reactNative = require(604             ); // 604 = ./react-native
+var _reactNative = require(552             ); // 552 = ./react-native
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -67697,7 +67732,7 @@ function createToolbarAndroidComponent(IconNamePropType, getImageSource) {
     iconSize: 24
   }, _temp));
 }
-}, 607, null, "react-native-vector-icons/lib/toolbar-android.js");
+}, 598, null, "react-native-vector-icons/lib/toolbar-android.js");
 __d(/* react-native-vector-icons/glyphmaps/Entypo.json */function(global, require, module, exports) {module.exports = module.exports = {
   "500px": 61696,
   "500px-with-circle": 61697,
@@ -68111,7 +68146,7 @@ __d(/* react-native-vector-icons/glyphmaps/Entypo.json */function(global, requir
   "youtube": 62105,
   "youtube-with-circle": 62106
 };
-}, 620, null, "react-native-vector-icons/glyphmaps/Entypo.json");
+}, 599, null, "react-native-vector-icons/glyphmaps/Entypo.json");
 ;require(54);
 ;require(0);
 //# sourceMappingURL=index.map
