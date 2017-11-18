@@ -21,12 +21,14 @@ const styles = StyleSheet.create({
   },
 });
 
-const DetailScreen = ({ navigation }) => (
-  <View style={styles.container}>
-    <Text style={[styles.heading, { marginBottom: 24 }]}>{navigation.state.params.title}</Text>
-    <Text style={styles.paragraph}>{navigation.state.params.detail}</Text>
-  </View>
-);
+function DetailScreen({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <Text style={[styles.heading, { marginBottom: 24 }]}>{navigation.state.params.title}</Text>
+      <Text style={styles.paragraph}>{navigation.state.params.detail}</Text>
+    </View>
+  );
+}
 
 DetailScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

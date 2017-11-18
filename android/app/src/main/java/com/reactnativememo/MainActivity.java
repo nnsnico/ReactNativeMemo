@@ -1,9 +1,6 @@
 package com.reactnativememo;
 
 import com.facebook.react.ReactActivity;
-import io.realm.react.RealmReactPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import io.realm.react.RealmReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 
 public class MainActivity extends ReactActivity {

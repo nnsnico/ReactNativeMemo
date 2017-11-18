@@ -2,7 +2,7 @@ import { NavigationActions } from 'react-navigation';
 import { combineReducers } from 'redux';
 import { AppNavigator } from '../containers/App';
 
-const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Tab'));
+const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'));
 
 function nav(state = initialState, action) {
   let nextState;
@@ -13,6 +13,7 @@ function nav(state = initialState, action) {
         routeName: 'Detail',
         params: action.listItem,
       });
+      console.log(action.listItem);
       nextState = AppNavigator.router.getStateForAction(
         navigateAction,
         state,

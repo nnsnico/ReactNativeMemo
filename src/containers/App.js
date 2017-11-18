@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, StackNavigator, TabBarBottom } from 'react-navigation';
+import { addNavigationHelpers, StackNavigator } from 'react-navigation';
 
 import DetailScreen from '../components/DetailScreen';
-import ManageMemoTab from '../components/ManageMemoTab';
+import HomeScreen from '../components/HomeScreen';
 
 export const sampleList = [
   {
@@ -32,41 +32,31 @@ export const AppNavigator = StackNavigator({
       title: 'Detail',
     },
   },
-  Tab: {
-    screen: ManageMemoTab,
+  Home: {
+    screen: HomeScreen,
     navigationOptions: {
       title: 'Home',
-    },
-    tabBarOptions: {
-      tabBarComponent: TabBarBottom,
-      tabBarPosition: 'bottom',
-      style: {
-        backgroundColor: '#ffffff',
-      },
-      indicatorStyle: {
-        backgroundColor: '#1fff1f',
-      },
-      activeTintColor: '#037aff',
-      inactiveTintColor: '#737373',
-      showLabel: false,
-      showIcon: true,
     },
   },
 });
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator
-    navigation={addNavigationHelpers({ dispatch, state: nav })}
-  />
-);
+function AppWithNavigationState({ dispatch, nav }) {
+  return (
+    <AppNavigator
+      navigation={addNavigationHelpers({ dispatch, state: nav })}
+    />
+  );
+}
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,
   nav: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  nav: state.nav,
-});
+function mapStateToProps(state) {
+  return {
+    nav: state.nav,
+  };
+}
 
 export default connect(mapStateToProps)(AppWithNavigationState);
