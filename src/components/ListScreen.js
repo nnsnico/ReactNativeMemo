@@ -41,22 +41,24 @@ const sampleList = [
   },
 ];
 
-const ListScreen = ({ navigation }) => (
-  <FlatList
-    data={sampleList}
-    keyExtractor={(item, index) => index}
-    renderItem={({ item }) => (
-      <TouchableOpacity
-        key={item.key}
-        style={styles.item}
-        onPress={() => navigation.dispatch(goDetail(item))}
-      >
-        <Text style={styles.heading}>{item.title}</Text>
-      </TouchableOpacity>
-    )}
-    contentContainerStyle={styles.container}
-  />
-);
+function ListScreen({ navigation }) {
+  return (
+    <FlatList
+      data={sampleList}
+      keyExtractor={(item, index) => index}
+      renderItem={({ item }) => (
+        <TouchableOpacity
+          key={item.key}
+          style={styles.item}
+          onPress={() => navigation.dispatch(goDetail(item))}
+        >
+          <Text style={styles.heading}>{item.title}</Text>
+        </TouchableOpacity>
+      )}
+      contentContainerStyle={styles.container}
+    />
+  );
+}
 
 ListScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

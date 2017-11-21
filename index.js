@@ -8,10 +8,12 @@ import AppReducer from './src/reducers';
 
 const store = createStore(AppReducer);
 
-const index = () => (
-  <Provider store={store}>
-    <AppWithNavigationState />
-  </Provider>
-);
+function index() {
+  return (
+    <Provider store={store}>
+      <AppWithNavigationState />
+    </Provider>
+  );
+}
 
 AppRegistry.registerComponent('ReactNativeMemo', () => index);

@@ -54,19 +54,23 @@ export const AppNavigator = StackNavigator({
   },
 });
 
-const AppWithNavigationState = ({ dispatch, nav }) => (
-  <AppNavigator
-    navigation={addNavigationHelpers({ dispatch, state: nav })}
-  />
-);
+function AppWithNavigationState({ dispatch, nav }) {
+  return (
+    <AppNavigator
+      navigation={addNavigationHelpers({ dispatch, state: nav })}
+    />
+  );
+}
 
 AppWithNavigationState.propTypes = {
   dispatch: PropTypes.func.isRequired,
   nav: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  nav: state.nav,
-});
+function mapStateToProps(state) {
+  return ({
+    nav: state.nav,
+  });
+}
 
 export default connect(mapStateToProps)(AppWithNavigationState);
