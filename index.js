@@ -1,4 +1,19 @@
+import React from 'react';
 import { AppRegistry } from 'react-native';
-import App from './App';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 
-AppRegistry.registerComponent('ReactNativeMemo', () => App);
+import AppWithNavigationState from './src/containers/App';
+import AppReducer from './src/reducers';
+
+const store = createStore(AppReducer);
+
+function index() {
+  return (
+    <Provider store={store}>
+      <AppWithNavigationState />
+    </Provider>
+  );
+}
+
+AppRegistry.registerComponent('ReactNativeMemo', () => index);
