@@ -54,9 +54,9 @@ AppWithNavigationState.propTypes = {
 };
 
 function mapStateToProps(state) {
-  return {
+  return ({
     nav: state.nav,
-  };
+  });
 }
 
 export default connect(mapStateToProps)(AppWithNavigationState);
