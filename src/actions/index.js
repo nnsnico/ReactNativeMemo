@@ -8,3 +8,11 @@ export function goDetail(item) {
     listItem: item,
   };
 }
+
+export function addMemo(title, detail) {
+  return {
+    type: 'ADD_MEMO',
+    title,
+    detail,
+  };
+}

@@ -67,6 +67,7 @@ class AddListScreen extends React.Component {
     const { navigation } = this.props;
 
     if (!title) return Alert.alert('Error', 'titleは必須です');
+
     addNewMemoItem({ title, detail });
     this.setState({ title: '', detail: '' });
     return (
