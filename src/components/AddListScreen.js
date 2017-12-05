@@ -7,13 +7,14 @@ import {
   TextInput,
   Button,
   Keyboard,
+  Alert,
 } from 'react-native';
+import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
@@ -49,12 +50,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 9,
     height: 80,
   },
+  buttonStyle: {
+    alignSelf: 'stretch',
+  },
 });
 
 class AddListScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { title: '', detail: '' };
+    this.handleOnPress = this.handleOnPress.bind(this);
+  }
+
+  handleOnPress({ title, detail }) {
+    const { addNewMemoItem } = this.props.screenProps;
+    const { navigation } = this.props;
+
+    if (!title) return Alert.alert('Error', 'titleは必須です');
+    addNewMemoItem({ title, detail });
+    this.setState({ title: '', detail: '' });
+    return (
+      Alert.alert(
+        'Success',
+        '項目を追加しました',
+        [
+          { text: 'OK', onPress: () => navigation.navigate('List') },
+        ],
+      )
+    );
   }
 
   render() {
@@ -80,11 +103,25 @@ class AddListScreen extends React.Component {
               value={this.state.detail}
             />
           </View>
-          <Button title="Add item to list" onPress={() => (console.log('hello~'))} />
+          <Button
+            style={styles.buttonStyle}
+            onPress={() =>
+              this.handleOnPress({
+                title: this.state.title,
+                detail: this.state.detail,
+              })
+            }
+            title="Add item to list"
+          />
         </View>
       </TouchableWithoutFeedback>
     );
   }
 }
+
+AddListScreen.propTypes = {
+  screenProps: PropTypes.object.isRequired,
+  navigation: PropTypes.object.isRequired,
+};
 
 export default AddListScreen;
