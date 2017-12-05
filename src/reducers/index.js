@@ -3,29 +3,28 @@ import { combineReducers } from 'redux';
 import { AppNavigator } from '../containers/App';
 
 const initialState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'));
-let nextState;
 
 function nav(state = initialState, action) {
   switch (action.type) {
     case 'GO_DETAIL': {
-      const navigateAction = NavigationActions.navigate({
-        routeName: 'Detail',
-        params: action.listItem,
-      });
-      nextState = AppNavigator.router.getStateForAction(
-        navigateAction,
-        state,
+      return (
+        AppNavigator.router.getStateForAction(
+          NavigationActions.navigate({
+            routeName: 'Detail',
+            params: action.listItem,
+          }),
+          state,
+        )
       );
-      break;
     }
-    default:
-      nextState = AppNavigator.router.getStateForAction(action, state);
+    default: {
+      return AppNavigator.router.getStateForAction(action, state);
+    }
   }
-  return nextState || state;
 }
 
 const AppReducer = combineReducers({
-  nav,
+  nav: nextState = nav,
 });
 
 export default AppReducer;
