@@ -6,29 +6,19 @@ import ListScreen from './ListScreen';
 import AddListScreen from './AddListScreen';
 import { addMemo } from '../actions/index';
 
-function listIcon(tintColor: string) {
-  return (
-    <Entypo name="list" size={24} color={tintColor} />
-  );
-}
-
-function addToListIcon(tintColor: string) {
-  return (
-    <Entypo name="add-to-list" size={24} color={tintColor} />
-  );
-}
-
 const Tab = TabNavigator({
   List: {
     screen: ListScreen,
     navigationOptions: {
-      tabBarIcon: listIcon,
+      tabBarIcon: (tintColor: string) => <Entypo name="list" size={24} color={tintColor} />
+      ,
     },
   },
   AddToList: {
     screen: AddListScreen,
     navigationOptions: {
-      tabBarIcon: addToListIcon,
+      tabBarIcon: (tintColor: string) => <Entypo name="add-to-list" size={24} color={tintColor} />
+      ,
     },
   },
 }, {

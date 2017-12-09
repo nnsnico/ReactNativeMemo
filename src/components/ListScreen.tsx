@@ -26,10 +26,10 @@ const styles = StyleSheet.create({
 class ListScreen extends React.Component<any, any> {
   render() {
     const { navigation, memo } = this.props.screenProps;
+    console.log(1, memo);
     return (
       <FlatList
         data={memo}
-        extraData={memo}
         keyExtractor={(item: any, index: number) => String(index)}
         renderItem={({ item }) => (
           <TouchableOpacity
