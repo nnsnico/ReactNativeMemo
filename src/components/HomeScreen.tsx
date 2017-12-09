@@ -1,21 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Entypo';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 import ListScreen from './ListScreen';
 import AddListScreen from './AddListScreen';
 import { addMemo } from '../actions/index';
 
-function listIcon({ tintColor }) {
+function listIcon(tintColor: string) {
   return (
-    <Icon name="list" size={24} color={tintColor} />
+    <Entypo name="list" size={24} color={tintColor} />
   );
 }
 
-function addToListIcon({ tintColor }) {
+function addToListIcon(tintColor: string) {
   return (
-    <Icon name="add-to-list" size={24} color={tintColor} />
+    <Entypo name="add-to-list" size={24} color={tintColor} />
   );
 }
 
@@ -49,13 +48,13 @@ const Tab = TabNavigator({
   },
 });
 
-class HomeScreen extends React.Component {
-  constructor(props) {
+class HomeScreen extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
-    this.AddNewMemoItem = this.AddNewMemoItem.bind(this);
+    this.addNewMemoItem = this.addNewMemoItem.bind(this);
   }
 
-  AddNewMemoItem({ title, detail }) {
+  addNewMemoItem(title: string, detail: string) {
     this.props.screenProps.dispatch(addMemo(title, detail));
   }
 
@@ -66,28 +65,14 @@ class HomeScreen extends React.Component {
         screenProps={{
           navigation,
           memo,
-          addNewMemoItem: this.AddNewMemoItem,
+          addNewMemoItem: this.addNewMemoItem,
         }}
       />
     );
   }
 }
 
-HomeScreen.propTypes = ({
-  navigation: PropTypes.object.isRequired,
-  screenProps: PropTypes.object.isRequired,
-  memo: PropTypes.array.isRequired,
-});
-
-listIcon.propTypes = ({
-  tintColor: PropTypes.string.isRequired,
-});
-
-addToListIcon.propTypes = ({
-  tintColor: PropTypes.string.isRequired,
-});
-
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return ({
     memo: state.memo,
   });

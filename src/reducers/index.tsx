@@ -1,10 +1,10 @@
 import { NavigationActions } from 'react-navigation';
 import { combineReducers } from 'redux';
-import { AppNavigator } from '../containers/App';
+import { AppNavigator } from '../containers/AppContainer';
 
-const initialNavState = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'));
+const initialNavState: any = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'), null);
 
-function nav(state = initialNavState, action) {
+function nav(state: any = initialNavState, action: any) {
   switch (action.type) {
     case 'GO_DETAIL': {
       return (
@@ -41,7 +41,7 @@ const initialMemoList = [
   },
 ];
 
-function memo(state = initialMemoList, action) {
+function memo(state = initialMemoList, action: any): {key?: string, title: string, detail: string}[] {
   switch (action.type) {
     case 'ADD_MEMO': {
       return [
