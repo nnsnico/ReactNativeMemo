@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {
   StyleSheet,
   TouchableWithoutFeedback,
@@ -9,7 +9,6 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
-import PropTypes from 'prop-types';
 
 const styles = StyleSheet.create({
   container: {
@@ -55,20 +54,20 @@ const styles = StyleSheet.create({
   },
 });
 
-class AddListScreen extends React.Component {
-  constructor(props) {
+class AddListScreen extends React.Component<any, any> {
+  constructor(props: any) {
     super(props);
     this.state = { title: '', detail: '' };
     this.handleOnPress = this.handleOnPress.bind(this);
   }
 
-  handleOnPress({ title, detail }) {
+  handleOnPress(title: string, detail: string) {
     const { addNewMemoItem } = this.props.screenProps;
     const { navigation } = this.props;
 
     if (!title) return Alert.alert('Error', 'titleは必須です');
 
-    addNewMemoItem({ title, detail });
+    addNewMemoItem(title, detail);
     this.setState({ title: '', detail: '' });
     return (
       Alert.alert(
@@ -89,7 +88,7 @@ class AddListScreen extends React.Component {
             <Text style={[styles.paragraph, styles.label]}>title</Text>
             <TextInput
               blurOnSubmit
-              onChangeText={title => this.setState({ title })}
+              onChangeText={(title: string) => this.setState({ title })}
               style={[styles.textInput, styles.heading]}
               value={this.state.title}
             />
@@ -99,18 +98,17 @@ class AddListScreen extends React.Component {
             <TextInput
               blurOnSubmit
               multiline
-              onChangeText={detail => this.setState({ detail })}
+              onChangeText={(detail: string) => this.setState({ detail })}
               style={[styles.multiTextInput, styles.paragraph]}
               value={this.state.detail}
             />
           </View>
           <Button
-            style={styles.buttonStyle}
             onPress={() =>
-              this.handleOnPress({
-                title: this.state.title,
-                detail: this.state.detail,
-              })
+              this.handleOnPress(
+                this.state.title,
+                this.state.detail,
+              )
             }
             title="Add item to list"
           />
@@ -119,10 +117,5 @@ class AddListScreen extends React.Component {
     );
   }
 }
-
-AddListScreen.propTypes = {
-  screenProps: PropTypes.object.isRequired,
-  navigation: PropTypes.object.isRequired,
-};
 
 export default AddListScreen;
