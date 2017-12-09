@@ -10,15 +10,13 @@ const Tab = TabNavigator({
   List: {
     screen: ListScreen,
     navigationOptions: {
-      tabBarIcon: (tintColor: string) => <Entypo name="list" size={24} color={tintColor} />
-      ,
+      tabBarIcon: ({ tintColor }: any) => (<Entypo name="list" size={24} color={tintColor} />),
     },
   },
   AddToList: {
     screen: AddListScreen,
     navigationOptions: {
-      tabBarIcon: (tintColor: string) => <Entypo name="add-to-list" size={24} color={tintColor} />
-      ,
+      tabBarIcon: ({ tintColor }: any) => (<Entypo name="add-to-list" size={24} color={tintColor} />),
     },
   },
 }, {
@@ -33,7 +31,7 @@ const Tab = TabNavigator({
     },
     activeTintColor: '#037aff',
     inactiveTintColor: '#737373',
-    showLabel: false,
+    showLabel: true,
     showIcon: true,
   },
 });
