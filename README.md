@@ -14,10 +14,10 @@ ReactNative + Reduxでクロスプラットフォームなメモアプリを作�
 1. なんとなくReactNativeをつかめた上でReduxによるデータフローを使ってソースコードを書き直す
 
 ## 開発環境
-IntelliJ Idea Ultimate 2017.3.1
-node v8.8.1(npm v5.4.1)
-react native
-react navigation
-redux
-typescript
+* IntelliJ Idea Ultimate 2017.3.1
+* node v8.8.1(npm v5.4.1)
+* react native
+* react navigation
+* redux
+* typescript
 
