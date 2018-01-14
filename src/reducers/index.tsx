@@ -1,6 +1,7 @@
 import { NavigationActions } from 'react-navigation';
 import { combineReducers } from 'redux';
 import { AppNavigator } from '../containers/AppContainer';
+import Memo from '../models/Memo';
 
 const initialNavState: any = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'), null);
 
@@ -23,7 +24,7 @@ function nav(state: any = initialNavState, action: any) {
   }
 }
 
-const initialMemoList = [
+const initialMemoList: Memo[] = [
   {
     key: 'hoge',
     title: 'hogeの神秘',
@@ -41,7 +42,7 @@ const initialMemoList = [
   },
 ];
 
-function memo(state = initialMemoList, action: any): {key?: string, title: string, detail: string}[] {
+function memo(state = initialMemoList, action: any): Memo[] {
   switch (action.type) {
     case 'ADD_MEMO': {
       return [
@@ -51,6 +52,9 @@ function memo(state = initialMemoList, action: any): {key?: string, title: strin
           detail: action.detail,
         },
       ];
+    }
+    case 'ADD_MEMO_ASYNC': {
+      return state;
     }
     default: {
       return state;

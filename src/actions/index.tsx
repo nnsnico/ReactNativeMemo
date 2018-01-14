@@ -12,3 +12,11 @@ export function addMemo(title: string, detail: string) {
     detail,
   };
 }
+
+export function addMemoAsync(title: string, detail: string) {
+  return {
+    type: 'ADD_MEMO_ASYNC',
+    title,
+    detail,
+  }
+}
