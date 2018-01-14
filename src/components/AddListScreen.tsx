@@ -13,7 +13,7 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 4,
+    backgroundColor: '#fff',
     borderColor: 'rgba(14, 13, 13, .38)',
     borderWidth: 1,
     paddingHorizontal: 12,
@@ -44,6 +45,7 @@ const styles = StyleSheet.create({
   },
   multiTextInput: {
     flex: 4,
+    backgroundColor: '#fff',
     borderColor: 'rgba(14, 13, 13, .38)',
     borderWidth: 1,
     paddingHorizontal: 9,
