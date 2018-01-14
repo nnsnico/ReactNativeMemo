@@ -5,6 +5,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import ListScreen from './ListScreen';
 import AddListScreen from './AddListScreen';
 import { addMemo } from '../actions/index';
+import Memo from '../models/Memo';
 
 const Tab = TabNavigator({
   List: {
@@ -20,29 +21,35 @@ const Tab = TabNavigator({
     },
   },
 }, {
-  tabBarComponent: TabBarBottom,
-  tabBarPosition: 'bottom',
-  tabBarOptions: {
-    style: {
-      backgroundColor: '#ffffff',
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    tabBarOptions: {
+      style: {
+        backgroundColor: '#ffffff',
+      },
+      indicatorStyle: {
+        backgroundColor: '#1fff1f',
+      },
+      activeTintColor: '#037aff',
+      inactiveTintColor: '#737373',
+      showLabel: true,
+      showIcon: true,
     },
-    indicatorStyle: {
-      backgroundColor: '#1fff1f',
-    },
-    activeTintColor: '#037aff',
-    inactiveTintColor: '#737373',
-    showLabel: true,
-    showIcon: true,
-  },
-});
+  });
 
-class HomeScreen extends React.Component<any, any> {
-  constructor(props: any) {
+interface HomeScreenPropaties {
+  screenProps: any;
+  navigation: any;
+  memo: Memo;
+}
+
+class HomeScreen extends React.Component<HomeScreenPropaties, any> {
+  constructor(props: HomeScreenPropaties) {
     super(props);
     this.addNewMemoItem = this.addNewMemoItem.bind(this);
   }
 
-  addNewMemoItem(title: string, detail: string) {
+  addNewMemoItem(title: string, detail: string): void {
     this.props.screenProps.dispatch(addMemo(title, detail));
   }
 

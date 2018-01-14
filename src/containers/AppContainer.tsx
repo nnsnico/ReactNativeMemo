@@ -21,7 +21,12 @@ export const AppNavigator: NavigationContainer = StackNavigator({
   },
 });
 
-class AppWithNavigationState extends React.Component<any, any> {
+interface ContainerPropaties {
+  dispatch: any;
+  nav: any;
+}
+
+class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
   render() {
     return (
       <AppNavigator

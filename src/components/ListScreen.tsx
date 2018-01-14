@@ -22,8 +22,11 @@ const styles = StyleSheet.create({
   },
 });
 
+interface ListScreenPropaties {
+  screenProps: any;
+}
 
-class ListScreen extends React.Component<any, any> {
+class ListScreen extends React.Component<ListScreenPropaties, any> {
   render() {
     const { navigation, memo } = this.props.screenProps;
     return (

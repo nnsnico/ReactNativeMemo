@@ -54,8 +54,19 @@ const styles = StyleSheet.create({
   },
 });
 
-class AddListScreen extends React.Component<any, any> {
-  constructor(props: any) {
+interface AddListScreenPropaties {
+  addNewMemoItem?: void;
+  screenProps?: any;
+  navigation?: any;
+}
+
+interface AddListScreenState {
+  title?: string;
+  detail?: string;
+}
+
+class AddListScreen extends React.Component<AddListScreenPropaties, AddListScreenState> {
+  constructor(props: AddListScreenPropaties) {
     super(props);
     this.state = { title: '', detail: '' };
     this.handleOnPress = this.handleOnPress.bind(this);
