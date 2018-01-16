@@ -2,10 +2,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import Entypo from 'react-native-vector-icons/Entypo';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
+
 import ListScreen from './ListScreen';
 import AddListScreen from './AddListScreen';
-import { addMemo } from '../actions/index';
 import Memo from '../models/Memo';
+import { addMemo, goDetail } from '../actions/index';
 
 const Tab = TabNavigator({
   List: {
@@ -47,10 +48,15 @@ class HomeScreen extends React.Component<HomeScreenPropaties, any> {
   constructor(props: HomeScreenPropaties) {
     super(props);
     this.addNewMemoItem = this.addNewMemoItem.bind(this);
+    this.goDetailScreen = this.goDetailScreen.bind(this);
   }
 
   addNewMemoItem(title: string, detail: string): void {
     this.props.screenProps.dispatch(addMemo(title, detail));
+  }
+
+  goDetailScreen(item: any): void {
+    this.props.screenProps.dispatch(goDetail(item));
   }
 
   render() {
@@ -58,9 +64,9 @@ class HomeScreen extends React.Component<HomeScreenPropaties, any> {
     return (
       <Tab
         screenProps={{
-          navigation,
           memo,
           addNewMemoItem: this.addNewMemoItem,
+          goDetailScreen: this.goDetailScreen,
         }}
       />
     );

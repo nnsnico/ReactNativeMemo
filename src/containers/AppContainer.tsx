@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { BackHandler } from 'react-native';
 import { connect } from 'react-redux';
-import { addNavigationHelpers, NavigationContainer, StackNavigator } from 'react-navigation';
+import { addNavigationHelpers, NavigationContainer, StackNavigator, NavigationActions } from 'react-navigation';
 
 import DetailScreen from '../components/DetailScreen';
 import HomeScreen from '../components/HomeScreen';
@@ -27,6 +28,24 @@ interface ContainerPropaties {
 }
 
 class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
+  // Press to back by Android Back key
+  componentDidMount() {
+    BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener("hardwareBackPress", this.onBackPress);
+  }
+
+  onBackPress = () => {
+    const { dispatch, nav } = this.props;
+    if (nav.index === 0) {
+      return false;
+    }
+    dispatch(NavigationActions.back());
+    return true;
+  };
+
   render() {
     return (
       <AppNavigator
