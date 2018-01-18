@@ -52,7 +52,7 @@ class HomeScreen extends React.Component<HomeScreenProperties, any> {
   }
 
   addNewMemoItem(memo: Memo): void {
-    // TODO: add memo with saving in local storage by `addMemoAsync`
+    // add memo with saving in local storage by `addMemoAsync`
     this.props.screenProps.dispatch(addMemoAsync(memo));
   }
 
