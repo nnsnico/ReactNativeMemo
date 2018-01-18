@@ -2,6 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native';
 
 import MemoListItem from './MemoListItem';
+import Memo from '../models/Memo';
 
 const styles = StyleSheet.create({
   container: {
@@ -9,8 +10,16 @@ const styles = StyleSheet.create({
   },
 });
 
+interface ScreenPropsProperties {
+  goDetailScreen: (item: Memo) => void;
+  memo: Memo[];
+}
 
-class ListScreen extends React.Component<any, any> {
+interface ListScreenPropaties {
+  screenProps: ScreenPropsProperties;
+}
+
+class ListScreen extends React.Component<ListScreenPropaties, any> {
   render() {
     const { goDetailScreen, memo } = this.props.screenProps;
     return (

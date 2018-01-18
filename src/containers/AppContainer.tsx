@@ -22,7 +22,12 @@ export const AppNavigator: NavigationContainer = StackNavigator({
   },
 });
 
-class AppWithNavigationState extends React.Component<any, any> {
+interface ContainerPropaties {
+  dispatch: any;
+  nav: any;
+}
+
+class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
   // Press to back by Android Back key
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);

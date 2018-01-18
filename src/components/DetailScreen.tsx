@@ -19,7 +19,11 @@ const styles = StyleSheet.create({
   },
 });
 
-class DetailScreen extends React.Component<any, any>{
+interface DetailScreenPropaties {
+  navigation: any;
+}
+
+class DetailScreen extends React.Component<DetailScreenPropaties, any>{
   render() {
     const { navigation } = this.props;
     return (
