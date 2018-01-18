@@ -17,7 +17,7 @@ const initialMemoList = [
 ]
 
 export default interface Memo {
-    key?: string,
+    key: string,
     title: string,
-    detail?: string,
+    detail: string,
 }
