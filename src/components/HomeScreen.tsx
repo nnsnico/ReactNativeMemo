@@ -6,7 +6,7 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 import ListScreen from './ListScreen';
 import AddListScreen from './AddListScreen';
 import Memo from '../models/Memo';
-import { addMemo, goDetail } from '../actions/index';
+import { addMemo, goDetail, addMemoAsync } from '../actions/index';
 
 const Tab = TabNavigator({
   List: {
@@ -38,24 +38,25 @@ const Tab = TabNavigator({
     },
   });
 
-interface HomeScreenPropaties {
+interface HomeScreenProperties {
   screenProps: any;
   navigation: any;
-  memo: Memo;
+  memo: Memo[];
 }
 
-class HomeScreen extends React.Component<HomeScreenPropaties, any> {
-  constructor(props: HomeScreenPropaties) {
+class HomeScreen extends React.Component<HomeScreenProperties, any> {
+  constructor(props: HomeScreenProperties) {
     super(props);
     this.addNewMemoItem = this.addNewMemoItem.bind(this);
     this.goDetailScreen = this.goDetailScreen.bind(this);
   }
 
-  addNewMemoItem(title: string, detail: string): void {
-    this.props.screenProps.dispatch(addMemo(title, detail));
+  addNewMemoItem(memo: Memo): void {
+    // TODO: add memo with saving in local storage by `addMemoAsync`
+    this.props.screenProps.dispatch(addMemoAsync(memo));
   }
 
-  goDetailScreen(item: any): void {
+  goDetailScreen(item: Memo): void {
     this.props.screenProps.dispatch(goDetail(item));
   }
 

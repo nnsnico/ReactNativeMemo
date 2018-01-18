@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, TouchableHighlight } from 'react-native';
 
+import Memo from '../models/Memo'
+
 const styles = StyleSheet.create({
   item: {
     borderBottomWidth: 0.5,
@@ -17,8 +19,8 @@ const styles = StyleSheet.create({
 });
 
 interface ListItemPropaties {
-  item: any,
-  goDetailScreen: any,
+  item: Memo,
+  goDetailScreen: (item: Memo) => void,
 }
 
 class MemoListItem extends React.Component<ListItemPropaties, any> {
@@ -27,7 +29,7 @@ class MemoListItem extends React.Component<ListItemPropaties, any> {
     this.handleOnPress = this.handleOnPress.bind(this);
   }
 
-  handleOnPress(item: any) {
+  handleOnPress(item: Memo) {
     const { goDetailScreen } = this.props;
     goDetailScreen(item);
   }

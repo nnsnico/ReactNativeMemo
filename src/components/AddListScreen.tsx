@@ -9,6 +9,9 @@ import {
   Keyboard,
   Alert,
 } from 'react-native';
+import uuid from 'uuid';
+
+import Memo from '../models/Memo';
 
 const styles = StyleSheet.create({
   container: {
@@ -56,9 +59,12 @@ const styles = StyleSheet.create({
   },
 });
 
+interface ScreenPropsPropaties {
+  addNewMemoItem?: (memo: Memo) => void;
+}
+
 interface AddListScreenPropaties {
-  addNewMemoItem?: void;
-  screenProps?: any;
+  screenProps?: ScreenPropsPropaties;
   navigation?: any;
 }
 
@@ -78,9 +84,17 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
     const { addNewMemoItem } = this.props.screenProps;
     const { navigation } = this.props;
 
-    if (!title) return Alert.alert('Error', 'titleは必須です');
+    const memo: Memo = {
+      key: uuid.v4(),
+      title,
+      detail,
+    }
 
-    addNewMemoItem(title, detail);
+    if (!title) {
+      return Alert.alert('Error', 'titleは必須です');
+    }
+
+    addNewMemoItem(memo);
     this.setState({ title: '', detail: '' });
     return (
       Alert.alert(
