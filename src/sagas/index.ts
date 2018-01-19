@@ -6,7 +6,6 @@ import Memo from '../models/Memo';
 
 function* initialLoadStorage() {
   // LocalStorage内のデータを全部ロードする(初期処理)
-  yield console.log(1, 'hogehoge');
   const memos: Memo[] = yield LocalStorage.loadAllItems();
   for (const memo of memos) {
     yield console.log('memo', memo);
