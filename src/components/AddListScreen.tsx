@@ -10,6 +10,7 @@ import {
   Alert,
 } from 'react-native';
 import uuid from 'uuid';
+import moment from 'moment-timezone';
 
 import Memo from '../models/Memo';
 
@@ -84,10 +85,14 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
     const { addNewMemoItem } = this.props.screenProps;
     const { navigation } = this.props;
 
+    moment.tz.setDefault("Asia/Tokyo");
+    let nowDate = moment().format('YYYY年MM月DD日 A h:mm:ss');
+
     const memo: Memo = {
       key: uuid.v4(),
       title,
       detail,
+      createTime: nowDate
     }
 
     if (!title) {

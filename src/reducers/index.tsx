@@ -38,6 +38,7 @@ function memo(state = initialMemoList, action: ADD_MEMO_PROPERTIES): Memo[] {
           key: action.memo.key,
           title: action.memo.title,
           detail: action.memo.detail,
+          createTime: action.memo.createTime,
         },
       ];
     }

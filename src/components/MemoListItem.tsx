@@ -16,6 +16,12 @@ const styles = StyleSheet.create({
     padding: 8,
     fontSize: 16,
   },
+  date: {
+    textAlign: 'right',
+    paddingRight: 8,
+    paddingBottom: 8,
+    fontSize: 16,
+  }
 });
 
 interface ListItemPropaties {
@@ -40,7 +46,6 @@ class MemoListItem extends React.Component<ListItemPropaties, any> {
       <View>
         <TouchableOpacity
           key={item.key}
-          style={styles.item}
           onPress={() => this.handleOnPress(item)}
         >
           <View>
@@ -51,8 +56,10 @@ class MemoListItem extends React.Component<ListItemPropaties, any> {
             >
               {item.detail}
             </Text>
+            <Text style={styles.date}>{item.createTime}</Text>
           </View>
         </TouchableOpacity>
+        <View style={styles.item} />
       </View>
     )
   }
