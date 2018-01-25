@@ -1,10 +1,12 @@
 import * as React from 'react';
-import { BackHandler } from 'react-native';
+import { BackHandler, Button, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, NavigationContainer, StackNavigator, NavigationActions } from 'react-navigation';
+import Entypo from 'react-native-vector-icons/Entypo';
 
 import DetailScreen from '../components/DetailScreen';
 import HomeScreen from '../components/HomeScreen';
+import Colors from '../Colors';
 
 export const AppNavigator: NavigationContainer = StackNavigator({
   // 詳細画面
@@ -12,12 +14,21 @@ export const AppNavigator: NavigationContainer = StackNavigator({
     screen: DetailScreen,
     navigationOptions: {
       title: 'Detail',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: Colors.PRIMARY_DARK,
+      },
+      headerRight: <Entypo name="trash" size={24} color={Colors.ACCENT} style={{ paddingRight: (Platform.OS === 'android') ? 12 : 0 }} />,
     },
   },
   Home: {
     screen: HomeScreen,
     navigationOptions: {
       title: 'Home',
+      headerTintColor: 'white',
+      headerStyle: {
+        backgroundColor: Colors.PRIMARY_DARK,
+      },
     },
   },
 });

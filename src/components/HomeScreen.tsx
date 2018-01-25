@@ -7,6 +7,7 @@ import ListScreen from './ListScreen';
 import AddListScreen from './AddListScreen';
 import Memo from '../models/Memo';
 import { addMemo, goDetail, addMemoAsync } from '../actions/index';
+import Colors from '../Colors';
 
 const Tab = TabNavigator({
   List: {
@@ -26,12 +27,9 @@ const Tab = TabNavigator({
     tabBarPosition: 'bottom',
     tabBarOptions: {
       style: {
-        backgroundColor: '#ffffff',
+        backgroundColor: Colors.PRIMARY,
       },
-      indicatorStyle: {
-        backgroundColor: '#1fff1f',
-      },
-      activeTintColor: '#037aff',
+      activeTintColor: Colors.ACCENT,
       inactiveTintColor: '#737373',
       showLabel: true,
       showIcon: true,
