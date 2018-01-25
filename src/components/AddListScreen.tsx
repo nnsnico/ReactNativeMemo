@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   },
   multiTextInput: {
     flex: 4,
+    textAlignVertical: 'top',
     backgroundColor: '#fff',
     borderColor: 'rgba(14, 13, 13, .38)',
     borderWidth: 1,
