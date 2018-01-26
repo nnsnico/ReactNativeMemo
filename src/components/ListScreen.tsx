@@ -31,17 +31,6 @@ interface ListScreenPropaties {
 class ListScreen extends React.Component<ListScreenPropaties, any> {
   constructor(props: ListScreenPropaties) {
     super(props);
-    this.screen = this.screen.bind(this);
-  }
-
-  screen = () => {
-    const { goDetailScreen, memo } = this.props.screenProps;
-    if (memo.length === 0) {
-      return <Text>No List</Text>
-    } else {
-      return
-
-    }
   }
 
   render() {
