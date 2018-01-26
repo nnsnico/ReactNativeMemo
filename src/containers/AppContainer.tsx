@@ -6,6 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import DetailScreen from '../components/DetailScreen';
 import HomeScreen from '../components/HomeScreen';
+import Memo from '../models/Memo';
 import Colors from '../Colors';
 
 export const AppNavigator: NavigationContainer = StackNavigator({
@@ -39,6 +40,12 @@ interface ContainerPropaties {
 }
 
 class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
+  constructor(props: ContainerPropaties) {
+    super(props);
+    this.removeMemoItem = this.removeMemoItem.bind(this);
+  }
+
+
   // Press to back by Android Back key
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
@@ -57,11 +64,15 @@ class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
     return true;
   };
 
+  removeMemoItem(item: Memo) {
+    console.log('remove item.');
+  }
+
   render() {
     return (
       <AppNavigator
         navigation={addNavigationHelpers({ dispatch: this.props.dispatch, state: this.props.nav })}
-        screenProps={{ dispatch: this.props.dispatch }}
+        screenProps={{ removeMemoItem: this.removeMemoItem }}
       />
     );
   }

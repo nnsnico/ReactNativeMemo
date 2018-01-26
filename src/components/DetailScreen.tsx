@@ -1,5 +1,9 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Platform } from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+
+import Memo from '../models/Memo';
+import Colors from '../Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,11 +23,27 @@ const styles = StyleSheet.create({
   },
 });
 
+interface ScreenPropsProperties {
+  removeMemoItem: (item: Memo) => void;
+}
+
 interface DetailScreenPropaties {
   navigation: any;
+  screenProps: ScreenPropsProperties;
 }
 
 class DetailScreen extends React.Component<DetailScreenPropaties, any>{
+  static navigationOptions = ({ navigation, screenProps }: any) => ({
+    headerRight: (
+      <Entypo
+        name="trash"
+        size={24}
+        color={Colors.ACCENT}
+        style={{ paddingRight: (Platform.OS === 'android') ? 16 : 0 }}
+        onPress={screenProps.removeMemoItem(navigation.state.params)} />
+    ),
+  });
+
   render() {
     const { navigation } = this.props;
     return (
