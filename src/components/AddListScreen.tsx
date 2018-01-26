@@ -13,6 +13,7 @@ import uuid from 'uuid';
 import moment from 'moment-timezone';
 
 import Memo from '../models/Memo';
+import Colors from '../Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -144,6 +145,7 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
               )
             }
             title="Add item to list"
+            color={Colors.ACCENT}
           />
         </View>
       </TouchableWithoutFeedback>
