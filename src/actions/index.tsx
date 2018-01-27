@@ -46,6 +46,19 @@ export namespace REMOVE_MEMO_NAME {
 
 /*-------------------------------------------------------------*/
 
+// CHANGE MEMO
+export interface CHANGE_MEMO_PROPERTIES {
+  type: string,
+  memo?: Memo,
+}
+
+export namespace CHANGE_MEMO_NAME {
+  export const properties = {
+    type: 'CHANGE_MEMO',
+  }
+}
+/*-------------------------------------------------------------*/
+
 // action creators
 export function goDetail(item: Memo): GO_DETAIL_PROPERTIES {
   return {
@@ -78,6 +91,13 @@ export function removeMemo(memo: Memo): REMOVE_MEMO_PROPERTIES {
 export function removeMemoAsync(memo: Memo): REMOVE_MEMO_PROPERTIES {
   return {
     type: REMOVE_MEMO_NAME.properties.typeOfAsync,
+    memo,
+  }
+}
+
+export function changeMemo(memo: Memo): CHANGE_MEMO_PROPERTIES {
+  return {
+    type: CHANGE_MEMO_NAME.properties.type,
     memo,
   }
 }

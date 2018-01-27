@@ -6,7 +6,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 
 import DetailScreen from '../components/DetailScreen';
 import HomeScreen from '../components/HomeScreen';
-import { removeMemoAsync } from '../actions/index';
+import { removeMemoAsync, changeMemo } from '../actions/index';
 import Memo from '../models/Memo';
 import Colors from '../Colors';
 
@@ -28,6 +28,7 @@ interface ContainerPropaties {
 class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
   constructor(props: ContainerPropaties) {
     super(props);
+    this.saveEditMemoItem = this.saveEditMemoItem.bind(this);
     this.removeMemoItem = this.removeMemoItem.bind(this);
   }
 
@@ -49,23 +50,22 @@ class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
     return true;
   };
 
+  saveEditMemoItem(item: Memo): void {
+    const { dispatch } = this.props;
+    dispatch(changeMemo(item));
+  }
+
   removeMemoItem(item: Memo): void {
     const { dispatch } = this.props;
-    Alert.alert(
-      '削除',
-      'このメモを削除しますか？',
-      [
-        { text: 'キャンセル' },
-        { text: 'OK', onPress: () => { console.log('wahaha'); dispatch(removeMemoAsync(item)); dispatch(NavigationActions.back()); } },
-      ],
-    )
+    dispatch(removeMemoAsync(item));
+    dispatch(NavigationActions.back());
   }
 
   render() {
     return (
       <AppNavigator
         navigation={addNavigationHelpers({ dispatch: this.props.dispatch, state: this.props.nav })}
-        screenProps={{ removeMemoItem: this.removeMemoItem }}
+        screenProps={{ removeMemoItem: this.removeMemoItem, saveEditMemoItem: this.saveEditMemoItem }}
       />
     );
   }
