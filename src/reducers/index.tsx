@@ -1,9 +1,10 @@
 import { NavigationActions } from 'react-navigation';
 import { combineReducers } from 'redux';
 import { AppNavigator } from '../containers/AppContainer';
+import { List } from 'immutable';
 
 import Memo from '../models/Memo';
-import { ADD_MEMO_NAME, GO_DETAIL_NAME, ADD_MEMO_PROPERTIES, GO_DETAIL_PROPERTIES } from '../actions/index';
+import { ADD_MEMO_NAME, GO_DETAIL_NAME, ADD_MEMO_PROPERTIES, GO_DETAIL_PROPERTIES, REMOVE_MEMO_NAME, REMOVE_MEMO_PROPERTIES } from '../actions/index';
 
 const initialNavState: any = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'), null);
 
@@ -27,22 +28,25 @@ function nav(state: any = initialNavState, action: any) {
 }
 
 // load data list from LocalStorage
-const initialMemoList: Memo[] = [];
+const initialMemoList: List<Memo> = List([]);
 
-function memo(state = initialMemoList, action: ADD_MEMO_PROPERTIES): Memo[] {
+function memo(state: List<Memo> = initialMemoList, action: any): List<Memo> {
   switch (action.type) {
     case ADD_MEMO_NAME.properties.type: {
-      return [
-        ...state,
-        {
-          key: action.memo.key,
-          title: action.memo.title,
-          detail: action.memo.detail,
-          createTime: action.memo.createTime,
-        },
-      ];
+      return state.push({
+        key: action.memo.key,
+        title: action.memo.title,
+        detail: action.memo.detail,
+        createTime: action.memo.createTime,
+      });
     }
     case ADD_MEMO_NAME.properties.typeOfAsync: {
+      return state;
+    }
+    case REMOVE_MEMO_NAME.properties.type: {
+      return state.remove(state.indexOf(action.memo));
+    }
+    case REMOVE_MEMO_NAME.properties.typeOfAsync: {
       return state;
     }
     default: {
