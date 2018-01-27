@@ -34,13 +34,18 @@ interface DetailScreenPropaties {
 
 class DetailScreen extends React.Component<DetailScreenPropaties, any>{
   static navigationOptions = ({ navigation, screenProps }: any) => ({
+    title: 'Detail',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: Colors.PRIMARY_DARK,
+    },
     headerRight: (
       <Entypo
         name="trash"
         size={24}
         color={Colors.ACCENT}
         style={{ paddingRight: (Platform.OS === 'android') ? 16 : 0 }}
-        onPress={screenProps.removeMemoItem(navigation.state.params)} />
+        onPress={() => screenProps.removeMemoItem(navigation.state.params)} />
     ),
   });
 

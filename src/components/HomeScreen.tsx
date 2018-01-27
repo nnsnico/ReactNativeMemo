@@ -43,6 +43,14 @@ interface HomeScreenProperties {
 }
 
 class HomeScreen extends React.Component<HomeScreenProperties, any> {
+  static navigationOptions = ({
+    title: 'Home',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: Colors.PRIMARY_DARK,
+    },
+  })
+
   constructor(props: HomeScreenProperties) {
     super(props);
     this.addNewMemoItem = this.addNewMemoItem.bind(this);
