@@ -14,6 +14,8 @@ export namespace ADD_MEMO_NAME {
   }
 }
 
+/*-------------------------------------------------------------*/
+
 // GO DETAIL
 export interface GO_DETAIL_PROPERTIES {
   type: string,
@@ -25,6 +27,24 @@ export namespace GO_DETAIL_NAME {
     type: 'GO_DETAIL',
   }
 }
+
+/*-------------------------------------------------------------*/
+
+// REMOVE_MEMO
+export interface REMOVE_MEMO_PROPERTIES {
+  type: string,
+  typeOfAsync?: string,
+  memo?: Memo,
+}
+
+export namespace REMOVE_MEMO_NAME {
+  export const properties: REMOVE_MEMO_PROPERTIES = {
+    type: 'REMOVE_MEMO',
+    typeOfAsync: 'REMOVE_MEMO_ASYNC',
+  }
+}
+
+/*-------------------------------------------------------------*/
 
 // action creators
 export function goDetail(item: Memo): GO_DETAIL_PROPERTIES {
@@ -44,6 +64,20 @@ export function addMemo(memo: Memo): ADD_MEMO_PROPERTIES {
 export function addMemoAsync(memo: Memo): ADD_MEMO_PROPERTIES {
   return {
     type: ADD_MEMO_NAME.properties.typeOfAsync,
+    memo,
+  }
+}
+
+export function removeMemo(memo: Memo): REMOVE_MEMO_PROPERTIES {
+  return {
+    type: REMOVE_MEMO_NAME.properties.type,
+    memo,
+  }
+}
+
+export function removeMemoAsync(memo: Memo): REMOVE_MEMO_PROPERTIES {
+  return {
+    type: REMOVE_MEMO_NAME.properties.typeOfAsync,
     memo,
   }
 }

@@ -1,35 +1,22 @@
 import * as React from 'react';
-import { BackHandler, Button, Platform } from 'react-native';
+import { Alert, BackHandler, Button, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { addNavigationHelpers, NavigationContainer, StackNavigator, NavigationActions } from 'react-navigation';
 import Entypo from 'react-native-vector-icons/Entypo';
 
 import DetailScreen from '../components/DetailScreen';
 import HomeScreen from '../components/HomeScreen';
+import { removeMemoAsync } from '../actions/index';
+import Memo from '../models/Memo';
 import Colors from '../Colors';
 
 export const AppNavigator: NavigationContainer = StackNavigator({
   // 詳細画面
   Detail: {
     screen: DetailScreen,
-    navigationOptions: {
-      title: 'Detail',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: Colors.PRIMARY_DARK,
-      },
-      headerRight: <Entypo name="trash" size={24} color={Colors.ACCENT} style={{ paddingRight: (Platform.OS === 'android') ? 12 : 0 }} />,
-    },
   },
   Home: {
     screen: HomeScreen,
-    navigationOptions: {
-      title: 'Home',
-      headerTintColor: 'white',
-      headerStyle: {
-        backgroundColor: Colors.PRIMARY_DARK,
-      },
-    },
   },
 });
 
@@ -39,6 +26,11 @@ interface ContainerPropaties {
 }
 
 class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
+  constructor(props: ContainerPropaties) {
+    super(props);
+    this.removeMemoItem = this.removeMemoItem.bind(this);
+  }
+
   // Press to back by Android Back key
   componentDidMount() {
     BackHandler.addEventListener("hardwareBackPress", this.onBackPress);
@@ -57,11 +49,23 @@ class AppWithNavigationState extends React.Component<ContainerPropaties, any> {
     return true;
   };
 
+  removeMemoItem(item: Memo): void {
+    const { dispatch } = this.props;
+    Alert.alert(
+      '削除',
+      'このメモを削除しますか？',
+      [
+        { text: 'キャンセル' },
+        { text: 'OK', onPress: () => { console.log('wahaha'); dispatch(removeMemoAsync(item)); dispatch(NavigationActions.back()); } },
+      ],
+    )
+  }
+
   render() {
     return (
       <AppNavigator
         navigation={addNavigationHelpers({ dispatch: this.props.dispatch, state: this.props.nav })}
-        screenProps={{ dispatch: this.props.dispatch }}
+        screenProps={{ removeMemoItem: this.removeMemoItem }}
       />
     );
   }

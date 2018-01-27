@@ -43,6 +43,14 @@ interface HomeScreenProperties {
 }
 
 class HomeScreen extends React.Component<HomeScreenProperties, any> {
+  static navigationOptions = ({
+    title: 'Home',
+    headerTintColor: 'white',
+    headerStyle: {
+      backgroundColor: Colors.PRIMARY_DARK,
+    },
+  })
+
   constructor(props: HomeScreenProperties) {
     super(props);
     this.addNewMemoItem = this.addNewMemoItem.bind(this);
@@ -51,11 +59,11 @@ class HomeScreen extends React.Component<HomeScreenProperties, any> {
 
   addNewMemoItem(memo: Memo): void {
     // add memo with saving in local storage by `addMemoAsync`
-    this.props.screenProps.dispatch(addMemoAsync(memo));
+    this.props.navigation.dispatch(addMemoAsync(memo));
   }
 
   goDetailScreen(item: Memo): void {
-    this.props.screenProps.dispatch(goDetail(item));
+    this.props.navigation.dispatch(goDetail(item));
   }
 
   render() {
