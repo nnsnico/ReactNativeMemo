@@ -44,7 +44,7 @@ function memo(state: List<Memo> = initialMemoList, action: any): List<Memo> {
       return state;
     }
     case REMOVE_MEMO_NAME.properties.type: {
-      return state.remove(state.indexOf(action.memo));
+      return state.filterNot(item => item.key === action.memo.key).toList()
     }
     case REMOVE_MEMO_NAME.properties.typeOfAsync: {
       return state;
