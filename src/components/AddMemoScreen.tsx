@@ -90,7 +90,7 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
     return (
       Alert.alert(
         'Success',
-        '項目を追加しました',
+        'メモを追加しました',
         [
           { text: 'OK', onPress: () => navigation.navigate('List') },
         ],
