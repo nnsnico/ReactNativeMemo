@@ -4,7 +4,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import ListScreen from './ListScreen';
-import AddListScreen from './AddListScreen';
+import AddMemoScreen from './AddMemoScreen';
 import Memo from '../models/Memo';
 import { addMemo, goDetail, addMemoAsync } from '../actions/index';
 import Colors from '../Colors';
@@ -17,7 +17,7 @@ const Tab = TabNavigator({
     },
   },
   AddToList: {
-    screen: AddListScreen,
+    screen: AddMemoScreen,
     navigationOptions: {
       tabBarIcon: ({ tintColor }: any) => (<Entypo name="add-to-list" size={24} color={tintColor} />),
     },
