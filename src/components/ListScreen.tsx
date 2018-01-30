@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { StyleSheet, Text, FlatList, TouchableOpacity, View, ScrollView } from 'react-native';
 import { List as ListView, ListItem, Header } from 'react-native-elements';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { List } from 'immutable';
 
 import MemoListItem from './MemoListItem';
@@ -15,12 +16,12 @@ const styles = StyleSheet.create({
   no_data_container: {
     flex: 1,
     backgroundColor: '#fff',
-    flexDirection: 'column',
-    alignItems: 'center',
     justifyContent: 'center',
   },
   no_data_text: {
     fontSize: 30,
+    alignSelf: 'center',
+    paddingHorizontal: 16,
   }
 });
 
@@ -44,7 +45,12 @@ class ListScreen extends React.Component<ListScreenPropaties, any> {
       if (memo.size === 0) {
         return (
           <View style={styles.no_data_container}>
-            <Text style={styles.no_data_text}>No data</Text>
+            <View style={[{ flexDirection: 'row', justifyContent: 'center' }]}>
+              <Entypo name='new-message' size={64} color={Colors.PRIMARY} />
+              <Entypo name='arrow-right' size={64} color={Colors.PRIMARY} />
+            </View>
+            <Text style={[styles.no_data_text]}>Let's add a memo</Text>
+            <Text style={[styles.no_data_text]}>selecting the right tab!</Text>
           </View>
         )
       } else {
@@ -67,9 +73,7 @@ class ListScreen extends React.Component<ListScreenPropaties, any> {
     }
 
     return (
-      <View>
-        {Screen(memo)}
-      </View>
+      Screen(memo)
     );
   }
 }
