@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   inputGroup: {
-    borderWidth: 1,
     borderColor: Colors.PRIMARY_DARK,
     backgroundColor: '#fff',
     alignSelf: 'stretch',
