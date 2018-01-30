@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Text, Platform, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
+import { FormInput, FormLabel } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment-timezone';
 
@@ -12,18 +13,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 16,
+    paddingHorizontal: 4,
   },
   input: {
     alignSelf: 'stretch',
     justifyContent: 'space-between',
+    marginHorizontal: 4,
   },
   heading: {
     fontSize: 24,
     textAlign: 'center',
     color: '#0e0d0d',
-    borderColor: Colors.ACCENT,
-    borderBottomWidth: 1,
+    // borderColor: Colors.ACCENT,
+    // borderBottomWidth: 1,
   },
   paragraph: {
     fontSize: 18,
@@ -31,8 +33,9 @@ const styles = StyleSheet.create({
     borderColor: Colors.ACCENT,
   },
   createTime: {
-    fontSize: 18,
-    color: '#737373'
+    fontSize: 16,
+    color: '#737373',
+    marginTop: 8,
   }
 });
 
@@ -163,24 +166,38 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.input}>
-            <TextInput
-              style={[
+            <FormLabel labelStyle={[{ color: Colors.ACCENT }]}> TITLE</FormLabel>
+            <FormInput
+              containerStyle={[{
+                borderBottomColor: Colors.ACCENT,
+                borderBottomWidth: (memo.editable && Platform.OS === 'ios') ? 1 : 0,
+              }]}
+              inputStyle={[
                 styles.heading,
-                { marginBottom: 24 },
-                { borderBottomWidth: (memo.editable && Platform.OS === 'ios') ? 1 : 0 }
+                { width: '100%', },
               ]}
               underlineColorAndroid={(memo.editable) ? Colors.ACCENT : null}
+              maxLength={40}
               editable={(memo.editable) ? true : false}
               onChangeText={(title: string) => navigation.setParams({ title })}
               value={memo.title}
             />
           </View>
           <View style={styles.input}>
-            <TextInput
-              style={[
-                styles.paragraph,
-                { textAlignVertical: 'top' },
-                { borderBottomWidth: (memo.editable && Platform.OS === 'ios') ? 1 : 0 },
+            <FormLabel labelStyle={[{ color: Colors.ACCENT }]}>DETAIL</FormLabel>
+            <FormInput
+              containerStyle={[
+                {
+                  borderBottomColor: Colors.ACCENT,
+                  borderBottomWidth: (memo.editable && Platform.OS === 'ios') ? 1 : 0
+                }
+              ]}
+              inputStyle={[
+                {
+                  fontSize: 16,
+                  width: '100%',
+                  textAlignVertical: 'top'
+                },
               ]}
               underlineColorAndroid={(memo.editable) ? Colors.ACCENT : null}
               editable={(memo.editable) ? true : false}
@@ -190,7 +207,7 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
               value={memo.detail}
             />
           </View>
-          <Text style={styles.createTime}>最終更新日: {memo.createTime}</Text>
+          <Text style={styles.createTime}>LAST UPDATE: {memo.createTime}</Text>
         </View>
       </TouchableWithoutFeedback>
     );
