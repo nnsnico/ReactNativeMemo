@@ -46,14 +46,20 @@ class MemoListItem extends React.Component<ListItemPropaties, any> {
   render() {
     const { key, item } = this.props;
     return (
-      <ListItem
-        key={key}
-        title={item.title}
-        subtitle={item.detail}
-        rightTitle={item.createTime}
-        subtitleNumberOfLines={3}
-        onPress={() => this.handleOnPress(item)}
-      />
+      <View>
+        <ListItem
+          key={key}
+          title={item.title}
+          subtitle={
+            <View style={[{ flex: 1, marginHorizontal: 10 }]}>
+              <Text>{item.detail}</Text>
+              <Text style={[{ alignSelf: 'flex-end' }]}>{item.createTime}</Text>
+            </View>
+          }
+          subtitleNumberOfLines={3}
+          onPress={() => this.handleOnPress(item)}
+        />
+      </View>
     )
   }
 }
