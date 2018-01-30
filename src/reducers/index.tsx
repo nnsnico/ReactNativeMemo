@@ -4,7 +4,16 @@ import { AppNavigator } from '../containers/AppContainer';
 import { List } from 'immutable';
 
 import Memo from '../models/Memo';
-import { ADD_MEMO_NAME, GO_DETAIL_NAME, ADD_MEMO_PROPERTIES, GO_DETAIL_PROPERTIES, REMOVE_MEMO_NAME, REMOVE_MEMO_PROPERTIES } from '../actions/index';
+import {
+  ADD_MEMO_NAME,
+  GO_DETAIL_NAME,
+  ADD_MEMO_PROPERTIES,
+  ADD_ALL_MEMO_PROPERTIES,
+  GO_DETAIL_PROPERTIES,
+  REMOVE_MEMO_NAME,
+  REMOVE_MEMO_PROPERTIES,
+  ADD_ALL_MEMO_NAME
+} from '../actions/index';
 
 const initialNavState: any = AppNavigator.router.getStateForAction(AppNavigator.router.getActionForPathAndParams('Home'), null);
 
@@ -28,7 +37,7 @@ function nav(state: any = initialNavState, action: any) {
 }
 
 // load data list from LocalStorage
-const initialMemoList: List<Memo> = List([]);
+const initialMemoList: List<Memo> = List();
 
 function memo(state: List<Memo> = initialMemoList, action: any): List<Memo> {
   switch (action.type) {
@@ -42,6 +51,9 @@ function memo(state: List<Memo> = initialMemoList, action: any): List<Memo> {
     }
     case ADD_MEMO_NAME.properties.typeOfAsync: {
       return state;
+    }
+    case ADD_ALL_MEMO_NAME.properties.type: {
+      return action.list
     }
     case REMOVE_MEMO_NAME.properties.type: {
       return state.filterNot(item => item.key === action.memo.key).toList()
