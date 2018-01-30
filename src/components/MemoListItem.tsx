@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { StyleSheet, TouchableOpacity, Text, View, TouchableHighlight } from 'react-native';
+import { ListItem } from 'react-native-elements';
 
 import Memo from '../models/Memo'
+import { goDetail } from '../actions/index';
 
 const styles = StyleSheet.create({
   item: {
@@ -25,6 +27,7 @@ const styles = StyleSheet.create({
 });
 
 interface ListItemPropaties {
+  key: number,
   item: Memo,
   goDetailScreen: (item: Memo) => void,
 }
@@ -41,26 +44,16 @@ class MemoListItem extends React.Component<ListItemPropaties, any> {
   }
 
   render() {
-    const { item } = this.props;
+    const { key, item } = this.props;
     return (
-      <View>
-        <TouchableOpacity
-          key={item.key}
-          onPress={() => this.handleOnPress(item)}
-        >
-          <View>
-            <Text style={styles.heading}>{item.title}</Text>
-            <Text
-              style={styles.sentence}
-              numberOfLines={3}
-            >
-              {item.detail}
-            </Text>
-            <Text style={styles.date}>{item.createTime}</Text>
-          </View>
-        </TouchableOpacity>
-        <View style={styles.item} />
-      </View>
+      <ListItem
+        key={key}
+        title={item.title}
+        subtitle={item.detail}
+        rightTitle={item.createTime}
+        subtitleNumberOfLines={3}
+        onPress={() => this.handleOnPress(item)}
+      />
     )
   }
 }

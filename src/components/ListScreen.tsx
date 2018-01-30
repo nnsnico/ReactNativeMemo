@@ -1,9 +1,12 @@
 import * as React from 'react';
-import { StyleSheet, Text, FlatList, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, FlatList, TouchableOpacity, View, ScrollView } from 'react-native';
+import { List as ListView, ListItem, Header } from 'react-native-elements';
 import { List } from 'immutable';
 
 import MemoListItem from './MemoListItem';
 import Memo from '../models/Memo';
+import { goDetail } from '../actions/index';
+import Colors from '../Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,6 +14,7 @@ const styles = StyleSheet.create({
   },
   no_data_container: {
     flex: 1,
+    backgroundColor: '#fff',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -45,24 +49,25 @@ class ListScreen extends React.Component<ListScreenPropaties, any> {
         )
       } else {
         return (
-          <FlatList
-            data={memo.toArray()}
-            extraData={memo.toArray()}
-            keyExtractor={(item: any, index: number) => String(index)}
-            renderItem={({ item }) => (
-              <MemoListItem
-                item={item}
-                goDetailScreen={goDetailScreen}
-              />
-            )}
-            contentContainerStyle={styles.container}
-          />
+          <ScrollView>
+            <ListView containerStyle={[{ marginBottom: 20 }]}>
+              {
+                memo.map((memo: Memo, key: number) => (
+                  <MemoListItem
+                    key={key}
+                    item={memo}
+                    goDetailScreen={goDetailScreen}
+                  />
+                ))
+              }
+            </ListView>
+          </ScrollView>
         )
       }
     }
 
     return (
-      <View style={[styles.container, { flex: (memo.size === 0) ? 1 : 0 }]}>
+      <View>
         {Screen(memo)}
       </View>
     );
