@@ -7,6 +7,7 @@ import {
   TextInput,
   Keyboard,
   Alert,
+  Platform,
 } from 'react-native';
 import { Button, FormLabel, FormInput } from 'react-native-elements';
 import uuid from 'uuid';
@@ -18,6 +19,7 @@ import Colors from '../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
@@ -29,13 +31,13 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   textInput: {
-    borderBottomWidth: 1,
+    borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,
     borderBottomColor: Colors.ACCENT,
     paddingHorizontal: 4,
     height: 40,
   },
   multiTextInput: {
-    borderBottomWidth: 1,
+    borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,
     borderBottomColor: Colors.ACCENT,
     paddingHorizontal: 4,
     marginBottom: 8,
@@ -108,6 +110,7 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
               blurOnSubmit
               maxLength={40}
               onChangeText={(title: string) => this.setState({ title })}
+              underlineColorAndroid={Colors.ACCENT}
               containerStyle={[styles.textInput]}
               inputStyle={[{ width: '100%' }]}
               value={this.state.title}
@@ -116,9 +119,11 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
             <FormInput
               blurOnSubmit
               multiline
+              numberOfLines={4}
               onChangeText={(detail: string) => this.setState({ detail })}
+              underlineColorAndroid={Colors.ACCENT}
               containerStyle={[styles.multiTextInput]}
-              inputStyle={[{ width: '100%' }]}
+              inputStyle={[{ width: '100%', textAlignVertical: 'top' }]}
               value={this.state.detail}
             />
           </View>
