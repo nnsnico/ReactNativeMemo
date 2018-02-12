@@ -9,7 +9,7 @@ import {
   Alert,
   Platform,
 } from 'react-native';
-import { Button, FormLabel, FormInput } from 'react-native-elements';
+import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import uuid from 'uuid';
 import moment from 'moment-timezone';
 
@@ -59,12 +59,13 @@ interface AddListScreenPropaties {
 interface AddListScreenState {
   title?: string;
   detail?: string;
+  existsTitle: boolean;
 }
 
 class AddListScreen extends React.Component<AddListScreenPropaties, AddListScreenState> {
   constructor(props: AddListScreenPropaties) {
     super(props);
-    this.state = { title: '', detail: '' };
+    this.state = { title: '', detail: '', existsTitle: true };
     this.handleOnPress = this.handleOnPress.bind(this);
   }
 
@@ -83,11 +84,11 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
     }
 
     if (!title) {
-      return Alert.alert('Error', 'TITLEは必須です');
+      return this.setState({ existsTitle: false });
     }
 
     addNewMemoItem(memo);
-    this.setState({ title: '', detail: '' });
+    this.setState({ title: '', detail: '', existsTitle: true });
     return (
       Alert.alert(
         'Success',
@@ -108,17 +109,20 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
             <FormInput
               blurOnSubmit
               maxLength={40}
-              onChangeText={(title: string) => this.setState({ title })}
+              onFocus={() => this.setState({ existsTitle: true })}
+              onChangeText={(title: string) => { this.setState({ title }); this.setState({ existsTitle: true }) }}
               underlineColorAndroid={Colors.ACCENT}
               containerStyle={[styles.textInput]}
               inputStyle={[{ width: '100%' }]}
               value={this.state.title}
             />
+            {(!this.state.existsTitle) ? <FormValidationMessage>TITLEは必須です！</FormValidationMessage> : null}
             <FormLabel labelStyle={[{ color: Colors.PRIMARY_DARK }]}>DETAIL</FormLabel>
             <FormInput
               blurOnSubmit
               multiline
               numberOfLines={4}
+              onFocus={() => this.setState({ existsTitle: true })}
               onChangeText={(detail: string) => this.setState({ detail })}
               underlineColorAndroid={Colors.ACCENT}
               containerStyle={[styles.multiTextInput]}

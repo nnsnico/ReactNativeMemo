@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, Text, Platform, TouchableOpacity, TextInput, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native';
-import { FormInput, FormLabel } from 'react-native-elements';
+import { FormInput, FormLabel, FormValidationMessage } from 'react-native-elements';
 import Entypo from 'react-native-vector-icons/Entypo';
 import moment from 'moment-timezone';
 
@@ -131,10 +131,24 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
     }
     const { prevMemo } = navigation.state.params;
 
+    // handling when title was `null`
+    if (memo.title === '') {
+      navigation.setParams({ existsTitle: false })
+      return Alert.alert(
+        'エラー',
+        'TITLEは必須です',
+        [
+          { text: 'OK' },
+        ],
+      )
+    }
+
+    // handling when title and detail are doesn't change from before 
     if (memo.title === prevMemo.title && memo.detail === prevMemo.detail) {
       navigation.setParams({ editable: false });
       return;
     }
+
     Alert.alert(
       '保存',
       'メモを保存します',
@@ -155,7 +169,8 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
       handleRemove: this.handleRemove,
       handleEdit: this.handleEdit,
       handleSave: this.handleSave,
-      editable: false
+      editable: false,
+      existsTitle: true,
     });
   }
 
@@ -166,7 +181,7 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.input}>
-            <FormLabel labelStyle={[{ color: Colors.ACCENT }]}> TITLE</FormLabel>
+            <FormLabel labelStyle={[{ color: Colors.ACCENT }]}>TITLE</FormLabel>
             <FormInput
               containerStyle={[{
                 borderBottomColor: Colors.ACCENT,
@@ -179,7 +194,8 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
               underlineColorAndroid={(memo.editable) ? Colors.ACCENT : null}
               maxLength={40}
               editable={(memo.editable) ? true : false}
-              onChangeText={(title: string) => navigation.setParams({ title })}
+              // onFocus={(memo.existsTitle)}
+              onChangeText={(title: string) => navigation.setParams({ title, existsTitle: true })}
               value={memo.title}
             />
           </View>
@@ -203,7 +219,7 @@ class DetailScreen extends React.Component<DetailScreenPropaties, DetailScreenSt
               editable={(memo.editable) ? true : false}
               multiline
               numberOfLines={4}
-              onChangeText={(detail: string) => navigation.setParams({ detail })}
+              onChangeText={(detail: string) => { navigation.setParams({ detail }); navigation.setParams({ existsTitle: false }) }}
               value={memo.detail}
             />
           </View>
