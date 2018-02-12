@@ -5,10 +5,11 @@ import {
   View,
   Text,
   TextInput,
-  Button,
   Keyboard,
   Alert,
+  Platform,
 } from 'react-native';
+import { Button, FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
 import uuid from 'uuid';
 import moment from 'moment-timezone';
 
@@ -18,43 +19,27 @@ import Colors from '../Colors';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     paddingHorizontal: 16,
   },
   inputGroup: {
-    alignItems: 'center',
+    borderColor: Colors.PRIMARY_DARK,
+    backgroundColor: '#fff',
     alignSelf: 'stretch',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-  },
-  paragraph: {
-    fontSize: 18,
-    color: '#737373',
-  },
-  label: {
-    minWidth: 60,
+    padding: 16,
   },
   textInput: {
-    flex: 4,
-    backgroundColor: '#fff',
-    borderColor: 'rgba(14, 13, 13, .38)',
-    borderWidth: 1,
-    paddingHorizontal: 12,
+    borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,
+    borderBottomColor: Colors.ACCENT,
+    paddingHorizontal: 4,
     height: 40,
   },
-  heading: {
-    fontSize: 24,
-    color: 'rgba(14, 13, 13, .38)',
-  },
   multiTextInput: {
-    flex: 4,
-    textAlignVertical: 'top',
-    backgroundColor: '#fff',
-    borderColor: 'rgba(14, 13, 13, .38)',
-    borderWidth: 1,
-    paddingHorizontal: 9,
+    borderBottomWidth: (Platform.OS === 'ios') ? 1 : 0,
+    borderBottomColor: Colors.ACCENT,
+    paddingHorizontal: 4,
+    marginBottom: 8,
     height: 80,
   },
   buttonStyle: {
@@ -74,12 +59,13 @@ interface AddListScreenPropaties {
 interface AddListScreenState {
   title?: string;
   detail?: string;
+  existsTitle: boolean;
 }
 
 class AddListScreen extends React.Component<AddListScreenPropaties, AddListScreenState> {
   constructor(props: AddListScreenPropaties) {
     super(props);
-    this.state = { title: '', detail: '' };
+    this.state = { title: '', detail: '', existsTitle: true };
     this.handleOnPress = this.handleOnPress.bind(this);
   }
 
@@ -98,15 +84,15 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
     }
 
     if (!title) {
-      return Alert.alert('Error', 'titleは必須です');
+      return this.setState({ existsTitle: false });
     }
 
     addNewMemoItem(memo);
-    this.setState({ title: '', detail: '' });
+    this.setState({ title: '', detail: '', existsTitle: true });
     return (
       Alert.alert(
         'Success',
-        '項目を追加しました',
+        'メモを追加しました',
         [
           { text: 'OK', onPress: () => navigation.navigate('List') },
         ],
@@ -119,21 +105,28 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.inputGroup}>
-            <Text style={[styles.paragraph, styles.label]}>title</Text>
-            <TextInput
+            <FormLabel labelStyle={[{ color: Colors.PRIMARY_DARK }]}>TITLE</FormLabel>
+            <FormInput
               blurOnSubmit
-              onChangeText={(title: string) => this.setState({ title })}
-              style={[styles.textInput, styles.heading]}
+              maxLength={40}
+              onFocus={() => this.setState({ existsTitle: true })}
+              onChangeText={(title: string) => { this.setState({ title }); this.setState({ existsTitle: true }) }}
+              underlineColorAndroid={Colors.ACCENT}
+              containerStyle={[styles.textInput]}
+              inputStyle={[{ width: '100%' }]}
               value={this.state.title}
             />
-          </View>
-          <View style={styles.inputGroup}>
-            <Text style={[styles.paragraph, styles.label]}>detail</Text>
-            <TextInput
+            {(!this.state.existsTitle) ? <FormValidationMessage>TITLEは必須です！</FormValidationMessage> : null}
+            <FormLabel labelStyle={[{ color: Colors.PRIMARY_DARK }]}>DETAIL</FormLabel>
+            <FormInput
               blurOnSubmit
               multiline
+              numberOfLines={4}
+              onFocus={() => this.setState({ existsTitle: true })}
               onChangeText={(detail: string) => this.setState({ detail })}
-              style={[styles.multiTextInput, styles.paragraph]}
+              underlineColorAndroid={Colors.ACCENT}
+              containerStyle={[styles.multiTextInput]}
+              inputStyle={[{ width: '100%', textAlignVertical: 'top' }]}
               value={this.state.detail}
             />
           </View>
@@ -144,8 +137,10 @@ class AddListScreen extends React.Component<AddListScreenPropaties, AddListScree
                 this.state.detail,
               )
             }
-            title="Add item to list"
-            color={Colors.ACCENT}
+            containerViewStyle={[{ marginTop: 16 }]}
+            rounded
+            title="ADD MEMO TO LIST"
+            backgroundColor={Colors.ACCENT}
           />
         </View>
       </TouchableWithoutFeedback>

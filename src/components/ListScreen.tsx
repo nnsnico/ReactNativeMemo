@@ -1,9 +1,13 @@
 import * as React from 'react';
-import { StyleSheet, Text, FlatList, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, FlatList, TouchableOpacity, View, ScrollView } from 'react-native';
+import { List as ListView, ListItem, Header } from 'react-native-elements';
+import Entypo from 'react-native-vector-icons/Entypo';
 import { List } from 'immutable';
 
 import MemoListItem from './MemoListItem';
 import Memo from '../models/Memo';
+import { goDetail } from '../actions/index';
+import Colors from '../Colors';
 
 const styles = StyleSheet.create({
   container: {
@@ -11,12 +15,13 @@ const styles = StyleSheet.create({
   },
   no_data_container: {
     flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
+    backgroundColor: '#fff',
     justifyContent: 'center',
   },
   no_data_text: {
     fontSize: 30,
+    alignSelf: 'center',
+    paddingHorizontal: 16,
   }
 });
 
@@ -40,31 +45,35 @@ class ListScreen extends React.Component<ListScreenPropaties, any> {
       if (memo.size === 0) {
         return (
           <View style={styles.no_data_container}>
-            <Text style={styles.no_data_text}>No data</Text>
+            <View style={[{ flexDirection: 'row', justifyContent: 'center' }]}>
+              <Entypo name='new-message' size={64} color={Colors.PRIMARY} />
+              <Entypo name='arrow-right' size={64} color={Colors.PRIMARY} />
+            </View>
+            <Text style={[styles.no_data_text]}>Let's add a memo</Text>
+            <Text style={[styles.no_data_text]}>selecting the right tab!</Text>
           </View>
         )
       } else {
         return (
-          <FlatList
-            data={memo.toArray()}
-            extraData={memo.toArray()}
-            keyExtractor={(item: any, index: number) => String(index)}
-            renderItem={({ item }) => (
-              <MemoListItem
-                item={item}
-                goDetailScreen={goDetailScreen}
-              />
-            )}
-            contentContainerStyle={styles.container}
-          />
+          <ScrollView>
+            <ListView containerStyle={[{ marginBottom: 20 }]}>
+              {
+                memo.map((memo: Memo, key: number) => (
+                  <MemoListItem
+                    key={key}
+                    item={memo}
+                    goDetailScreen={goDetailScreen}
+                  />
+                ))
+              }
+            </ListView>
+          </ScrollView>
         )
       }
     }
 
     return (
-      <View style={[styles.container, { flex: (memo.size === 0) ? 1 : 0 }]}>
-        {Screen(memo)}
-      </View>
+      Screen(memo)
     );
   }
 }

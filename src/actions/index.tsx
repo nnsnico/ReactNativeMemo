@@ -1,3 +1,5 @@
+import { List } from 'immutable';
+
 import Memo from '../models/Memo';
 
 // ADD MEMO
@@ -11,6 +13,20 @@ export namespace ADD_MEMO_NAME {
   export const properties: ADD_MEMO_PROPERTIES = {
     type: 'ADD_MEMO',
     typeOfAsync: 'ADD_MEMO_ASYNC',
+  }
+}
+
+/*-------------------------------------------------------------*/
+
+// ADD ALL MEMO
+export interface ADD_ALL_MEMO_PROPERTIES {
+  type: string,
+  list?: List<Memo>,
+}
+
+export namespace ADD_ALL_MEMO_NAME {
+  export const properties: ADD_MEMO_PROPERTIES = {
+    type: 'ADD_ALL_MEMO',
   }
 }
 
@@ -78,6 +94,13 @@ export function addMemoAsync(memo: Memo): ADD_MEMO_PROPERTIES {
   return {
     type: ADD_MEMO_NAME.properties.typeOfAsync,
     memo,
+  }
+}
+
+export function addAllMemo(list: List<Memo>): ADD_ALL_MEMO_PROPERTIES {
+  return {
+    type: ADD_ALL_MEMO_NAME.properties.type,
+    list,
   }
 }
 
