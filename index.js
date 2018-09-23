@@ -1,4 +1,6 @@
+'use strict';
+
+import App from './build/index';
 import { AppRegistry } from 'react-native';
-import App from './App';
 
 AppRegistry.registerComponent('ReactNativeMemo', () => App);

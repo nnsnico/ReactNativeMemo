@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "jsx": "react-native",
+    "outDir": "build",
+    "rootDir": "src",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "lib": [
+      "dom",
+      "es2017"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "./index.js",
+    "build",
+    "node_modules",
+    "__tests__"
+  ],
+  "compileOnSave": false
+}
